@@ -10,10 +10,10 @@ class InstaUnlike:
         self.repository = repository
         self.configuration = configuration
 
-        self.max_likes_per_hour = self.configuration.instalike_max_likes_per_hour
+        self.max_unlikes_per_hour = self.configuration.instalike_max_likes_per_hour
 
         # Timing.
-        self.next_like_time = 0
+        self.next_unlike_time = 0
         self.like_time_delta = (60 * 60) // self.max_likes_per_hour
 
         self.working_day = datetime.date.today().day
@@ -61,11 +61,11 @@ class InstaUnlike:
         self.t1 = time.time()
         # hour elapsed
         if ((self.t1 - self.t0) >= 60 * 60):
-            print('# of likes in last hour: {0}'.format(self.hourly_likes))
+            print('# of likes in last hour: {0}'.format(self.hourly_unlikes))
             self.t0 = time.time()
-            self.hourly_likes = 0
+            self.hourly_unlikes = 0
             return True
-        elif self.hourly_likes > self.max_likes_per_hour:
+        elif self.hourly_unlikes > self.max_unlikes_per_hour:
             return False
         return True
 
@@ -74,7 +74,7 @@ class InstaUnlike:
         max_timeout = self.like_time_delta + (self.like_time_delta // 2)
 
         next_in = random.randint(min_timeout, max_timeout)
-        self.next_like_time = time.time() + next_in
+        self.next_unlike_time = time.time() + next_in
         self.get_stats()
 
     def photo_unliked(self):
@@ -92,8 +92,8 @@ class InstaUnlike:
         self.log('#######################################')
         self.log('----------------UNLIKES------------------')
         self.log('total time: {0:.0f}s'.format(self.t1 - self.t0))
-        self.log('unlikes: {0}'.format(self.likes))
-        self.log('failed unlikes: {0}'.format(self.failed_likes))
+        self.log('unlikes: {0}'.format(self.unlikes))
+        self.log('failed unlikes: {0}'.format(self.failed_unlikes))
         self.log('estimated unlikes per hour: {0:.0f}'.format(per_hour))
         self.log('next unlike in: {0:.0f}s'.format(self.next_like_time - time.time()))
         self.log('photos to unlike: {0}'.format(self.content_manager.get_media_count()))
