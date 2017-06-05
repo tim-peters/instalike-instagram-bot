@@ -47,7 +47,7 @@ class Configuration:
 		ban = self.config['BAN']
 		database = self.config['DATABASE']
 		instalike = self.config['INSTALIKE']
-		instalike = self.config['INSTAUNLIKE']
+		instaunlike = self.config['INSTAUNLIKE']
 		instafollow = self.config['INSTAFOLLOW']
 		blacklist = self.config['BLACKLIST']
 		likefilter = self.config['LIKEFILTER']
@@ -138,6 +138,7 @@ class Configuration:
 		self.check_Constraint(self.enable_instalike and not self.instalike_tags, 'default.cfg, section: INSTALIKE, option: tags - you have to provide tags that bot can use to download media', 2)
 		self.check_Constraint(self.like_min_likes_on_photo > self.like_max_likes_on_photo, 'default.cfg, section: LIKEFILTER, option: MinLikesOnPhoto & MaxLikesOnPhoto - max likes should be greater than min likes.', 2)
 		self.check_Constraint(self.bot_work_whole_time, 'bot is working whole time, be careful because leaving it running for too long time may result in blocked account.', 1)
+		self.check_Constraint(self.instalike_unlike and self.instalike_like, 'Likeing and unliking photos does not work together.', 2)
 
 		return self.validated
 
