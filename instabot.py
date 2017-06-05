@@ -4,6 +4,7 @@ import period
 import content
 import instafollow
 import instalike
+import instaunlike
 import instaactivity
 import configuration
 
@@ -24,6 +25,7 @@ class InstaBot:
 		# bots
 		self.follow_bot = instafollow.InstaFollow(self.operation, self.repository, self.content_manager, self.configuration)
 		self.like_bot = instalike.InstaLike(self.operation, self.repository, self.content_manager, self.configuration)
+		self.unlike_bot = instaunlike.InstaUnlike(self.operation, self.repository, self.content_manager, self.configuration)
 		self.activity_bot = instaactivity.InstaActivity(self.operation, self.repository, self.content_manager)
 
 		# timing
@@ -73,6 +75,9 @@ class InstaBot:
 
 				if(self.configuration.enable_instalike):
 						self.like_bot.act()
+
+				if(self.configuration.enable_instaunlike):
+						self.unlike_bot.act()
 
 				if(self.configuration.enable_instafollow):
 						self.follow_bot.act()

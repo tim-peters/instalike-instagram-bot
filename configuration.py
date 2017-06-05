@@ -47,6 +47,7 @@ class Configuration:
 		ban = self.config['BAN']
 		database = self.config['DATABASE']
 		instalike = self.config['INSTALIKE']
+		instalike = self.config['INSTAUNLIKE']
 		instafollow = self.config['INSTAFOLLOW']
 		blacklist = self.config['BLACKLIST']
 		likefilter = self.config['LIKEFILTER']
@@ -57,6 +58,7 @@ class Configuration:
 		self.bot_stop_after_minutes = int(bot.get('stopafternumerOfminutes', 0))
 		self.bot_work_hours = bot.get('workhoursperday', 6)
 		self.enable_instalike = bot.getboolean('instalike', True)
+		self.enable_instaunlike = bot.getboolean('instaunlike', False)
 		self.enable_instafollow = bot.getboolean('instafollow', True)
 		self.enable_instacomment = bot.getboolean('instacomment', False)
 		self.enable_instamessage = bot.getboolean('instamessage', False)

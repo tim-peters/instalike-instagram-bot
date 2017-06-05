@@ -58,6 +58,10 @@ class Like(BaseModel):
     photo_id = IntegerField()
     event_time = DateTimeField()
 
+class Unlike(BaseModel):
+    id = PrimaryKeyField()
+    photo_id = IntegerField()
+    event_time = DateTimeField()
 
 class Follow(BaseModel):
     id = PrimaryKeyField()
