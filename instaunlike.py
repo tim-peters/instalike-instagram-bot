@@ -14,7 +14,7 @@ class InstaUnlike:
 
         # Timing.
         self.next_unlike_time = 0
-        self.like_time_delta = (60 * 60) // self.max_likes_per_hour
+        self.like_time_delta = (60 * 60) // self.max_unlikes_per_hour
 
         self.working_day = datetime.date.today().day
 
