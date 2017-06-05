@@ -46,7 +46,7 @@ class InstaUnlike:
         if (not self.can_act()):
             return
 
-        if (time.time() < self.next_like_time):
+        if (time.time() < self.next_unlike_time):
             return
 
         media = self.content_manager.get_next_media()
@@ -61,7 +61,7 @@ class InstaUnlike:
         self.t1 = time.time()
         # hour elapsed
         if ((self.t1 - self.t0) >= 60 * 60):
-            print('# of likes in last hour: {0}'.format(self.hourly_unlikes))
+            print('# of unlikes in last hour: {0}'.format(self.hourly_unlikes))
             self.t0 = time.time()
             self.hourly_unlikes = 0
             return True
@@ -79,7 +79,7 @@ class InstaUnlike:
 
     def photo_unliked(self):
         self.unlikes += 1
-        self.unhourly_likes += 1
+        self.hourly_unlikes += 1
 
     def failed_to_unlike(self):
         self.failed_unlikes += 1
@@ -95,7 +95,7 @@ class InstaUnlike:
         self.log('unlikes: {0}'.format(self.unlikes))
         self.log('failed unlikes: {0}'.format(self.failed_unlikes))
         self.log('estimated unlikes per hour: {0:.0f}'.format(per_hour))
-        self.log('next unlike in: {0:.0f}s'.format(self.next_like_time - time.time()))
+        self.log('next unlike in: {0:.0f}s'.format(self.next_unlike_time - time.time()))
         self.log('photos to unlike: {0}'.format(self.content_manager.get_media_count()))
 
     def log(self, text):
